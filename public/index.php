@@ -1,14 +1,7 @@
 <?php
+// rest/public/index.php
 
-$uri = $_SERVER['REQUEST_URI'];
+require '../app/init.php';
 
-echo $uri . "<br>";
-
-$routes = array(
-    '/test' => 'Toto',
-    '/mon/dossier' => 'oki !!',
-);
-
-if(array_key_exists($uri, $routes)){
-    echo $routes[$uri];
-}
+require_once 'Aston/Loader/ClassLoader.php';
+$loader = new Aston\Loader\ClassLoader();
