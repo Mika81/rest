@@ -10,11 +10,11 @@ class Response
 
     public function setStatusCode($code)
     {
-        $this->statusCode = (int)$code;
+        $this->statusCode = (int) $code;
         return $this;
     }
 
-    public function getStatusCode()
+    public function getStatutCode()
     {
         return $this->statusCode;
     }
@@ -50,10 +50,12 @@ class Response
 
     public function output()
     {
-        http_response_code($this->getStatusCode());
-        foreach($this->getHeaders() as $key => $value){
+        http_response_code($this->getStatutCode());
+
+        foreach ($this->getHeaders() as $key => $value) {
             header($key.': '.$value);
         }
+
         return $this->getBody();
     }
 }
