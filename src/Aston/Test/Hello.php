@@ -2,9 +2,10 @@
 
 namespace Aston\Test;
 
-class Hello {
+class Hello
+{
     public function __construct()
     {
-        echo "hello world! <br>";
+        echo "Hi everyone !!!<br>";
     }
 }

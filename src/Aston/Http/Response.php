@@ -4,9 +4,15 @@ namespace Aston\Http;
 
 class Response
 {
-    private $statusCode = 200;
+    private $statusCode;
     private $headers = array();
     private $body;
+
+    public function __construct($body, $statusCode = 200)
+    {
+        $this->setBody($body)
+             ->setStatusCode($statusCode);
+    }
 
     public function setStatusCode($code)
     {
@@ -14,7 +20,7 @@ class Response
         return $this;
     }
 
-    public function getStatutCode()
+    public function getStatusCode()
     {
         return $this->statusCode;
     }
@@ -50,12 +56,11 @@ class Response
 
     public function output()
     {
-        http_response_code($this->getStatutCode());
+        http_response_code($this->getStatusCode());
 
         foreach ($this->getHeaders() as $key => $value) {
             header($key.': '.$value);
         }
-
         return $this->getBody();
     }
 }

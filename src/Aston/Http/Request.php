@@ -1,13 +1,12 @@
 <?php
 
-
 namespace Aston\Http;
 
 class Request
 {
     private $uri;
     private $params = array();
-    private $rawBody;
+    private $rawBody = array();
 
     public function __construct($uri = null)
     {
@@ -16,23 +15,27 @@ class Request
 
     public function getGet($key = null)
     {
-        if($key === null){
+        if ($key === null) {
             return $_GET;
         }
-        if (isset($_GET[$key])){
+
+        if (isset($_GET[$key])) {
             return $_GET[$key];
         }
+
         return null;
     }
 
     public function getPost($key = null)
     {
-        if($key === null){
+        if ($key === null) {
             return $_POST;
         }
-        if (isset($_POST[$key])){
+
+        if (isset($_POST[$key])) {
             return $_POST[$key];
         }
+
         return null;
     }
 
@@ -44,17 +47,16 @@ class Request
     public function getRawBody()
     {
         $body = file_get_contents('php://input');
-        if(strlen($body) > 0){
+
+        if (strlen($body) > 0) {
             parse_str($body, $this->rawBody);
         }
+
         return $this->rawBody;
     }
 
     /**
-     *
      * GET, POST, DELETE, PUT, HEAD
-     * @param $method
-     * @return bool
      */
     public function isMethod($method)
     {
@@ -68,10 +70,10 @@ class Request
 
     public function setUri($uri)
     {
-        if($uri === null)
-        {
+        if ($uri === null) {
             $uri = $this->getServer('REQUEST_URI');
         }
+
         $this->uri = (string) $uri;
         return $this;
     }
@@ -83,13 +85,11 @@ class Request
 
     public function getServer($key = null)
     {
-        if(null === $key)
-        {
+        if (null === $key) {
             return $_SERVER;
         }
 
-        if(isset($_SERVER[$key]))
-        {
+        if (isset($_SERVER[$key])) {
             return $_SERVER[$key];
         }
 
